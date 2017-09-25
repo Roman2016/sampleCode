@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}{% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+<body>
+{% block body %}
+    <div>
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+            <a href="{{ path('fos_user_security_logout') }}">
+                {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+            </a>
+        {% else %}
+            <a href="/register">Register</a>
+            <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+        {% endif %}
+    </div>
+    {% if is_granted("ROLE_USER") %}
+        Hi {{ app.user.username }}
+    {%else %}
+        {{ 'You are not login...' }}
+    {% endif %}
+
+    <div><a href="/addmessage">Add message</a></div>
+
+    {% for message in messages %}
+        <ul>
+            <li>{% if message.author %}
+                    {{  message.author }}
+                {% else %}
+                    {{ message.anonimousAuthor }}
+                {% endif %}
+            </li>
+            <li>{{ message.content }}</li>
+            <li>{{ message.date|date('Y-m-d H:i:s') }}</li>
+        </ul>
+    {% endfor %}
+{% endblock %}
+{% block javascripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,38 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Users CS
+ * Date: 23.09.2017
+ * Time: 22:10
+ */
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="tags")
+ */
+class Tag
+{
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $tagName;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Message")
+     * @ORM\JoinTable(name="tag_message",
+     * joinColumns={@ORM\JoinColumn(name="tag_id", referencedColumnName="id")},
+     * inverseJoinColumns={@ORM\JoinColumn(name="message_id", referencedColumnName="id")})
+     */
+    private $message;
+}

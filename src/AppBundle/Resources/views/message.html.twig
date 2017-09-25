@@ -1,0 +1,14 @@
+{% extends '@App/index.html.twig' %}
+
+{% block body %}
+    {{ form_start(form, {'method': 'post'}) }}
+    {% if is_granted("ROLE_USER") %}
+        Hi {{ app.user.username }}
+    {% else %}
+        {{ form_row(form.anonimousauthor.username) }}
+        {{ form_row(form.anonimousauthor.email) }}
+    {% endif %}
+        {{ form_row(form.content) }}
+        {{ form_row(form.post) }}
+    {{ form_end(form) }}
+{% endblock %}
