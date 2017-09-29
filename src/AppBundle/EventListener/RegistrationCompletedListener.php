@@ -47,7 +47,6 @@ class RegistrationCompletedListener implements EventSubscriberInterface
         $this->message->setContent('Welcome new user ' . $registrationForm->getData()->getUserName());
         $this->message->setAuthor($registrationForm->getData());
         $this->message->setDate(new \DateTime());
-        $this->message->setAnonimousAuthor(null);
         $this->em->persist($this->message);
         $this->em->flush();
 

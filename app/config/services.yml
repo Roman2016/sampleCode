@@ -53,7 +53,7 @@ services:
         class: AppBundle\Controller\MessageController
         arguments:
             - AppBundle\Entity\Message
-            - AppBundle\Entity\AnonimousUser
+            - AppBundle\Entity\User
 
     message.entity:
         class: AppBundle\Entity\Message

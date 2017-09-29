@@ -5,8 +5,8 @@
     {% if is_granted("ROLE_USER") %}
         Hi {{ app.user.username }}
     {% else %}
-        {{ form_row(form.anonimousauthor.username) }}
-        {{ form_row(form.anonimousauthor.email) }}
+        {{ form_row(form.author.username) }}
+        {{ form_row(form.author.email) }}
     {% endif %}
         {{ form_row(form.content) }}
         {{ form_row(form.post) }}

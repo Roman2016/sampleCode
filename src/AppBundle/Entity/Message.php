@@ -46,11 +46,11 @@ class Message
      */
     private $author;
 
-    /**
-    * @ORM\ManyToOne(targetEntity="AnonimousUser", inversedBy="id", cascade={"persist"})
-    * @ORM\JoinColumn(name="anonimous_author_id", referencedColumnName="id", nullable=true)
-    */
-    private $anonimousAuthor;
+//    /**
+//    * @ORM\ManyToOne(targetEntity="AnonimousUser", inversedBy="id", cascade={"persist"})
+//    * @ORM\JoinColumn(name="anonimous_author_id", referencedColumnName="id", nullable=true)
+//    */
+//    private $anonimousAuthor;
 
     /**
      * @ORM\Column(type="datetime")
@@ -139,27 +139,27 @@ class Message
         return $this->author;
     }
 
-    /**
-     * Set anonimousAuthor
-     *
-     * @param \AppBundle\Entity\AnonimousUser $anonimousAuthor
-     *
-     * @return Message
-     */
-    public function setAnonimousAuthor(\AppBundle\Entity\AnonimousUser $anonimousAuthor = null)
-    {
-        $this->anonimousAuthor = $anonimousAuthor;
-
-        return $this;
-    }
-
-    /**
-     * Get anonimousAuthor
-     *
-     * @return \AppBundle\Entity\AnonimousUser
-     */
-    public function getAnonimousAuthor()
-    {
-        return $this->anonimousAuthor;
-    }
+//    /**
+//     * Set anonimousAuthor
+//     *
+//     * @param \AppBundle\Entity\AnonimousUser $anonimousAuthor
+//     *
+//     * @return Message
+//     */
+//    public function setAnonimousAuthor(\AppBundle\Entity\AnonimousUser $anonimousAuthor = null)
+//    {
+//        $this->anonimousAuthor = $anonimousAuthor;
+//
+//        return $this;
+//    }
+//
+//    /**
+//     * Get anonimousAuthor
+//     *
+//     * @return \AppBundle\Entity\AnonimousUser
+//     */
+//    public function getAnonimousAuthor()
+//    {
+//        return $this->anonimousAuthor;
+//    }
 }

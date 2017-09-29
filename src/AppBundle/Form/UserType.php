@@ -1,23 +1,23 @@
 <?php
-
 /**
  * Created by PhpStorm.
- * User: Users CS
- * Date: 23.09.2017
- * Time: 16:10
+ * User: roman
+ * Date: 28.09.17
+ * Time: 14:48
  */
+
 namespace AppBundle\Form;
 
-use AppBundle\Entity\Message;
+use AppBundle\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Validator\Constraints\Valid;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
-class MessageType extends AbstractType
+class UserType extends AbstractType
 {
     private $tokenStorage;
 
@@ -29,21 +29,14 @@ class MessageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('content', TextareaType::class)
-            ->add('post', SubmitType::class);
-
-        if($this->tokenStorage->getToken()->getUser() == 'anon.')
-        {
-            $builder->add('author', UserType::class, array(
-                'constraints' => array(new Valid())
-            ));
-        }
+            ->add('username', TextType::class)
+            ->add('email', EmailType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => Message::class,
+            'data_class' => User::class,
             'cascade_validation' => true,
         ));
     }

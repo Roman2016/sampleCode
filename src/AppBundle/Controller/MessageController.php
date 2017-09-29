@@ -8,7 +8,7 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\AnonimousUser;
+use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\MessageType;
@@ -18,12 +18,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route as Route;
 class MessageController extends Controller
 {
     protected $message;
-    protected $anonimousAuthor;
+    protected $author;
 
-    public function __construct(Message $message, AnonimousUser $anonimousUser)
+    public function __construct(Message $message, User $user)
     {
         $this->message = $message;
-        $this->anonimousAuthor = $anonimousUser;
+        $this->author = $user;
     }
 
     /**
@@ -33,7 +33,11 @@ class MessageController extends Controller
     {
         if($this->getUser() == 'anon.')
         {
-            $this->message->setAnonimousAuthor($this->anonimousAuthor);
+            $this->message->setAuthor($this->author);
+        }
+        else
+        {
+            $this->message->setAuthor($this->getUser());
         }
         $form = $this->createForm(MessageType::class, $this->message);
         $form->handleRequest($request);
@@ -41,8 +45,14 @@ class MessageController extends Controller
         if ($form->isSubmitted() && $form->isValid())
         {
             $message = $form->getData();
+            if(!$this->getUser())
+            {
+                $message->getAuthor()->setPassword('password');
+                $message->getAuthor()->setPlainPassword('password');
+                $message->getAuthor()->setEnabled(false);
+                $message->getAuthor()->setLastLogin(new \DateTime());
+            }
             $message->setDate(new \DateTime());
-            $message->setAuthor($this->getUser());
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($message);
