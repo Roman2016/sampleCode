@@ -57,6 +57,5 @@ services:
 
 #commit 1
 #commit 2
-#commit 3
     message.entity:
         class: AppBundle\Entity\Message
