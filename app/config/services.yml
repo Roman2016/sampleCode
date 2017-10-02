@@ -55,5 +55,6 @@ services:
             - AppBundle\Entity\Message
             - AppBundle\Entity\User
 
+#commit 1
     message.entity:
         class: AppBundle\Entity\Message
