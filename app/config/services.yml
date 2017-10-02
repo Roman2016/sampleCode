@@ -56,5 +56,6 @@ services:
             - AppBundle\Entity\User
 
 #one
+#two
     message.entity:
         class: AppBundle\Entity\Message
